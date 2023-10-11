@@ -1,41 +1,26 @@
 #!/usr/bin/python3
 
-
-''' A module that returns the minimum Operations it takes to
-    get to n characters.
-
-    Available operations:
-        copy
-        paste
-'''
+""" Minimum Operations """
 
 
 def minOperations(n):
-    '''
-    returns the minimum operations to get n H's
-    '''
-    min_operations = 0
+    """
+    In a text file, there is a single character H. Your text editor can execute
+    only two operations in this file: Copy All and Paste. Given a number n,
+    write a method that calculates the fewest number of operations needed to
+    result in exactly n H characters in the file.
+    Returns an integer
+    If n is impossible to achieve, returns 0
+    """
+    if not isinstance(n, int):
+        return 0
 
-    if n <= 1:
-        return min_operations
-
-    for i in range(2, n + 1):
-        while n % i == 0:
-            min_operations += i
-            n /= i
-
-    return min_operations
-
-
-if __name__ == '__main__':
-    from random import randint
-    from time import time
-
-    start_time = time()
-
-    for i in range(10):
-        n = randint(2, 100)
-        print("Min # of operations to reach {} char: {}".
-              format(n, minOperations(n)))
-
-    print(f'==> Program completed in {time() - start_time:.3f}s')
+    operations = 0
+    iterator = 2
+    while (iterator <= n):
+        if not (n % iterator):
+            n = int(n / iterator)
+            operations += iterator
+            iterator = 1
+        iterator += 1
+    return operations
